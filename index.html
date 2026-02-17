@@ -15,7 +15,7 @@
       </div>
       <p class="eyebrow">Wedding Invitation</p>
       <h1>신랑 이성용 · 신부 유수진</h1>
-      <p class="hero-line">2026년 5월 9일 오후 2시</p>
+      <p class="hero-line">2026년 5월 9일 토요일 오후 2시</p>
       <p class="hero-line">부산 라온 웨딩홀</p>
     </header>
 
@@ -31,13 +31,18 @@
 
     <section class="section-card" id="gallery">
       <h2>갤러리</h2>
-      <div class="gallery-grid">
-        <img class="photo-card gallery-photo" src="assets/photos/photo-01.jpg" alt="웨딩 사진 1" loading="lazy" data-index="0" />
-        <img class="photo-card gallery-photo" src="assets/photos/photo-02.jpg" alt="웨딩 사진 2" loading="lazy" data-index="1" />
-        <img class="photo-card gallery-photo" src="assets/photos/photo-03.jpg" alt="웨딩 사진 3" loading="lazy" data-index="2" />
-        <img class="photo-card gallery-photo" src="assets/photos/photo-04.jpg" alt="웨딩 사진 4" loading="lazy" data-index="3" />
-        <img class="photo-card gallery-photo" src="assets/photos/photo-05.jpg" alt="웨딩 사진 5" loading="lazy" data-index="4" />
+      <div class="gallery-grid"></div>
+    </section>
+
+    <section class="section-card" id="video">
+      <h2>영상</h2>
+      <div class="video-wrap">
+        <button id="videoZoomBtn" class="video-zoom-btn" type="button" aria-label="영상 크게 보기">크게 보기</button>
+        <video id="weddingVideoPreview" class="wedding-video" muted autoplay loop playsinline preload="metadata">
+          <source src="assets/video/wedding-highlight.mp4" type="video/mp4" />
+        </video>
       </div>
+      <p class="notice">영상 파일: <code>assets/video/wedding-highlight.mp4</code></p>
     </section>
 
     <section class="section-card" id="location">
@@ -77,6 +82,15 @@
       <p class="notice" id="guestbookStatus" aria-live="polite"></p>
       <ul id="guestbookList" class="guestbook-list"></ul>
     </section>
+
+    <section class="section-card" id="share">
+      <h2>공유하기</h2>
+      <div class="share-row">
+        <button id="copyLinkBtn" class="btn" type="button">링크 복사</button>
+        <button id="kakaoShareBtn" class="btn btn-outline" type="button">카카오 공유</button>
+      </div>
+      <p class="notice" id="shareStatus" aria-live="polite"></p>
+    </section>
   </main>
 
   <audio id="weddingBgm" autoplay loop playsinline hidden>
@@ -88,6 +102,13 @@
     <button id="lightboxPrev" class="lightbox-nav lightbox-prev" type="button" aria-label="이전 사진">‹</button>
     <img id="lightboxImage" class="lightbox-image" alt="확대된 웨딩 사진" />
     <button id="lightboxNext" class="lightbox-nav lightbox-next" type="button" aria-label="다음 사진">›</button>
+  </div>
+
+  <div id="videoLightbox" class="video-lightbox" hidden>
+    <button id="videoLightboxClose" class="lightbox-close" type="button" aria-label="영상 닫기">×</button>
+    <video id="videoLightboxPlayer" class="video-lightbox-player" controls playsinline preload="metadata">
+      <source src="assets/video/wedding-highlight.mp4" type="video/mp4" />
+    </video>
   </div>
 
   <script src="script.js"></script>

@@ -34,17 +34,96 @@ const guestMessage = document.getElementById("guestMessage");
 const guestbookStatus = document.getElementById("guestbookStatus");
 const guestbookList = document.getElementById("guestbookList");
 const groomAdminTrigger = document.getElementById("groomAdminTrigger");
-const galleryPhotos = Array.from(document.querySelectorAll(".gallery-photo"));
+const galleryGrid = document.querySelector("#gallery .gallery-grid");
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightboxImage");
 const lightboxClose = document.getElementById("lightboxClose");
 const lightboxPrev = document.getElementById("lightboxPrev");
 const lightboxNext = document.getElementById("lightboxNext");
+const copyLinkBtn = document.getElementById("copyLinkBtn");
+const kakaoShareBtn = document.getElementById("kakaoShareBtn");
+const shareStatus = document.getElementById("shareStatus");
+const weddingVideoPreview = document.getElementById("weddingVideoPreview");
+const videoZoomBtn = document.getElementById("videoZoomBtn");
+const videoLightbox = document.getElementById("videoLightbox");
+const videoLightboxPlayer = document.getElementById("videoLightboxPlayer");
+const videoLightboxClose = document.getElementById("videoLightboxClose");
 
 let adminPressTimer = null;
 let currentPhotoIndex = 0;
 let touchStartX = 0;
 let touchEndX = 0;
+let videoTouchStartY = 0;
+let videoTouchEndY = 0;
+let galleryPhotos = [];
+
+function getPhotoPath(index) {
+  return `assets/photos/photo-${String(index).padStart(2, "0")}.jpg`;
+}
+
+async function buildGallery(maxPhotoCount = 30) {
+  if (!galleryGrid) {
+    return;
+  }
+
+  const checks = [];
+  for (let i = 1; i <= maxPhotoCount; i += 1) {
+    const src = getPhotoPath(i);
+    checks.push(
+      new Promise((resolve) => {
+        const probe = new Image();
+        probe.onload = () => resolve({ index: i, src, exists: true });
+        probe.onerror = () => resolve({ index: i, src, exists: false });
+        probe.src = src;
+      })
+    );
+  }
+
+  const results = await Promise.all(checks);
+  const existingPhotos = results.filter((item) => item.exists);
+
+  galleryGrid.innerHTML = "";
+  galleryPhotos = [];
+
+  existingPhotos.forEach((item, photoIndex) => {
+    const img = document.createElement("img");
+    img.className = "photo-card gallery-photo";
+    img.src = item.src;
+    img.alt = `웨딩 사진 ${item.index}`;
+    img.loading = "lazy";
+    img.dataset.index = String(photoIndex);
+    img.addEventListener("click", () => {
+      openLightbox(photoIndex);
+    });
+
+    galleryGrid.appendChild(img);
+    galleryPhotos.push(img);
+  });
+}
+
+function getShareUrl() {
+  return window.location.href;
+}
+
+copyLinkBtn?.addEventListener("click", async () => {
+  const shareUrl = getShareUrl();
+
+  try {
+    await navigator.clipboard.writeText(shareUrl);
+    if (shareStatus) {
+      shareStatus.textContent = "링크가 복사되었습니다.";
+    }
+  } catch {
+    if (shareStatus) {
+      shareStatus.textContent = "복사에 실패했습니다. 링크를 직접 복사해주세요.";
+    }
+  }
+});
+
+kakaoShareBtn?.addEventListener("click", () => {
+  const kakaoShareUrl = `https://story.kakao.com/share?url=${encodeURIComponent(getShareUrl())}`;
+  window.open(kakaoShareUrl, "_blank", "noopener,noreferrer");
+});
 
 function isAdmin() {
   return sessionStorage.getItem(ADMIN_SESSION_KEY) === "true";
@@ -207,11 +286,26 @@ function showNextPhoto() {
   openLightbox(currentPhotoIndex + 1);
 }
 
-galleryPhotos.forEach((photo, index) => {
-  photo.addEventListener("click", () => {
-    openLightbox(index);
-  });
-});
+function openVideoLightbox() {
+  if (!videoLightbox || !videoLightboxPlayer) {
+    return;
+  }
+
+  videoLightbox.hidden = false;
+  document.body.style.overflow = "hidden";
+  void videoLightboxPlayer.play().catch(() => {});
+}
+
+function closeVideoLightbox() {
+  if (!videoLightbox || !videoLightboxPlayer) {
+    return;
+  }
+
+  videoLightbox.hidden = true;
+  videoLightboxPlayer.pause();
+  videoLightboxPlayer.currentTime = 0;
+  document.body.style.overflow = "";
+}
 
 lightboxClose?.addEventListener("click", closeLightbox);
 lightboxPrev?.addEventListener("click", showPreviousPhoto);
@@ -220,6 +314,29 @@ lightboxNext?.addEventListener("click", showNextPhoto);
 lightbox?.addEventListener("click", (event) => {
   if (event.target === lightbox) {
     closeLightbox();
+  }
+});
+
+weddingVideoPreview?.addEventListener("click", openVideoLightbox);
+videoZoomBtn?.addEventListener("click", openVideoLightbox);
+videoLightboxClose?.addEventListener("click", closeVideoLightbox);
+
+videoLightbox?.addEventListener("click", (event) => {
+  if (event.target === videoLightbox) {
+    closeVideoLightbox();
+  }
+});
+
+videoLightbox?.addEventListener("touchstart", (event) => {
+  videoTouchStartY = event.changedTouches[0].clientY;
+});
+
+videoLightbox?.addEventListener("touchend", (event) => {
+  videoTouchEndY = event.changedTouches[0].clientY;
+  const deltaY = videoTouchEndY - videoTouchStartY;
+
+  if (deltaY > 80) {
+    closeVideoLightbox();
   }
 });
 
@@ -244,6 +361,11 @@ lightbox?.addEventListener("touchend", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
+  if (videoLightbox && !videoLightbox.hidden && event.key === "Escape") {
+    closeVideoLightbox();
+    return;
+  }
+
   if (!lightbox || lightbox.hidden) {
     return;
   }
@@ -299,4 +421,5 @@ guestbookForm?.addEventListener("submit", (event) => {
 });
 
 renderGuestbook();
+void buildGallery();
 
