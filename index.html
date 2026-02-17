@@ -1,0 +1,91 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이성용 · 유수진 모바일 청첩장</title>
+  <meta name="description" content="이성용, 유수진의 결혼식에 초대합니다." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="invitation">
+    <header class="hero section-card">
+      <p class="eyebrow">Wedding Invitation</p>
+      <h1>신랑 이성용 · 신부 유수진</h1>
+      <p class="hero-line">2026년 5월 9일 오후 2시</p>
+      <p class="hero-line">부산 라온 웨딩홀</p>
+    </header>
+
+    <section class="section-card" id="greeting">
+      <h2>인사말</h2>
+      <p class="paragraph">
+        서로의 삶을 따뜻하게 채워가며
+        새로운 출발을 하려 합니다.
+        귀한 걸음으로 함께해 주시면
+        더없는 기쁨으로 간직하겠습니다.
+      </p>
+    </section>
+
+    <section class="section-card" id="gallery">
+      <h2>갤러리</h2>
+      <div class="gallery-grid">
+        <img class="photo-card gallery-photo" src="assets/photos/photo-01.jpg" alt="웨딩 사진 1" loading="lazy" data-index="0" />
+        <img class="photo-card gallery-photo" src="assets/photos/photo-02.jpg" alt="웨딩 사진 2" loading="lazy" data-index="1" />
+        <img class="photo-card gallery-photo" src="assets/photos/photo-03.jpg" alt="웨딩 사진 3" loading="lazy" data-index="2" />
+        <img class="photo-card gallery-photo" src="assets/photos/photo-04.jpg" alt="웨딩 사진 4" loading="lazy" data-index="3" />
+        <img class="photo-card gallery-photo" src="assets/photos/photo-05.jpg" alt="웨딩 사진 5" loading="lazy" data-index="4" />
+      </div>
+    </section>
+
+    <section class="section-card" id="location">
+      <h2>오시는 길</h2>
+      <p class="venue">부산 라온 웨딩홀</p>
+      <p class="address" id="venueAddress">부산 라온 웨딩홀</p>
+      <div class="button-row">
+        <a class="btn" target="_blank" rel="noopener noreferrer" href="https://map.kakao.com/link/search/%EB%B6%80%EC%82%B0%20%EB%9D%BC%EC%98%A8%20%EC%9B%A8%EB%94%A9%ED%99%80">카카오맵 보기</a>
+        <a class="btn btn-outline" target="_blank" rel="noopener noreferrer" href="https://naver.me/551VRQnM">네이버지도 보기</a>
+      </div>
+    </section>
+
+    <section class="section-card" id="contact">
+      <h2>연락하기</h2>
+      <div class="contact-grid">
+        <article class="contact-card" id="groomAdminTrigger">
+          <p class="role">신랑</p>
+          <p class="name">이성용</p>
+          <a class="link-muted" href="tel:010-9630-5310">010-9630-5310</a>
+        </article>
+        <article class="contact-card">
+          <p class="role">신부</p>
+          <p class="name">유수진</p>
+          <a class="link-muted" href="tel:010-2597-5092">010-2597-5092</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card" id="guestbook">
+      <h2>방명록</h2>
+      <form id="guestbookForm" class="guestbook-form">
+        <input id="guestName" type="text" maxlength="20" placeholder="이름" required />
+        <textarea id="guestMessage" maxlength="200" rows="4" placeholder="축하 메시지를 남겨주세요" required></textarea>
+        <button class="btn" type="submit">메시지 남기기</button>
+      </form>
+      <p class="notice" id="guestbookStatus" aria-live="polite"></p>
+      <ul id="guestbookList" class="guestbook-list"></ul>
+    </section>
+  </main>
+
+  <audio id="weddingBgm" autoplay loop playsinline hidden>
+    <source src="assets/music/wedding-bgm.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div id="lightbox" class="lightbox" hidden>
+    <button id="lightboxClose" class="lightbox-close" type="button" aria-label="닫기">×</button>
+    <button id="lightboxPrev" class="lightbox-nav lightbox-prev" type="button" aria-label="이전 사진">‹</button>
+    <img id="lightboxImage" class="lightbox-image" alt="확대된 웨딩 사진" />
+    <button id="lightboxNext" class="lightbox-nav lightbox-next" type="button" aria-label="다음 사진">›</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
