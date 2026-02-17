@@ -42,7 +42,6 @@
           <source src="assets/video/wedding-highlight.mp4" type="video/mp4" />
         </video>
       </div>
-      <p class="notice">영상 파일: <code>assets/video/wedding-highlight.mp4</code></p>
     </section>
 
     <section class="section-card" id="location">
@@ -58,22 +57,72 @@
 
     <section class="section-card" id="contact">
       <h2>연락하기</h2>
-      <div class="contact-grid">
-        <article class="contact-card" id="groomAdminTrigger">
-          <p class="role">신랑</p>
-          <p class="name">이성용</p>
-          <a class="link-muted" href="tel:010-9630-5310">010-9630-5310</a>
+      <div class="family-grid">
+        <article class="contact-card family-card">
+          <p class="family-title">신랑측</p>
+          <div class="member-list">
+            <div class="member-item" id="groomAdminTrigger">
+              <p class="role">신랑</p>
+              <p class="name">이성용</p>
+              <div class="contact-actions">
+                <a class="link-muted action-link phone-link" href="tel:010-9630-5310" aria-label="전화 걸기"></a>
+                <a class="link-muted action-link sms-link" href="sms:010-9630-5310" aria-label="문자 보내기"></a>
+              </div>
+            </div>
+            <div class="member-item">
+              <p class="role">신랑측 혼주 · 아버지</p>
+              <p class="name">이재훈</p>
+              <div class="contact-actions">
+                <a class="link-muted action-link phone-link" href="tel:010-5068-3500" aria-label="전화 걸기"></a>
+                <a class="link-muted action-link sms-link" href="sms:010-5068-3500" aria-label="문자 보내기"></a>
+              </div>
+            </div>
+            <div class="member-item">
+              <p class="role">신랑측 혼주 · 어머니</p>
+              <p class="name">전매화</p>
+              <div class="contact-actions">
+                <a class="link-muted action-link phone-link" href="tel:010-5067-3500" aria-label="전화 걸기"></a>
+                <a class="link-muted action-link sms-link" href="sms:010-5067-3500" aria-label="문자 보내기"></a>
+              </div>
+            </div>
+          </div>
         </article>
-        <article class="contact-card">
-          <p class="role">신부</p>
-          <p class="name">유수진</p>
-          <a class="link-muted" href="tel:010-2597-5092">010-2597-5092</a>
+
+        <article class="contact-card family-card">
+          <p class="family-title">신부측</p>
+          <div class="member-list">
+            <div class="member-item">
+              <p class="role">신부</p>
+              <p class="name">유수진</p>
+              <div class="contact-actions">
+                <a class="link-muted action-link phone-link" href="tel:010-2597-5092" aria-label="전화 걸기"></a>
+                <a class="link-muted action-link sms-link" href="sms:010-2597-5092" aria-label="문자 보내기"></a>
+              </div>
+            </div>
+            <div class="member-item">
+              <p class="role">신부측 혼주 · 아버지</p>
+              <p class="name">유재화</p>
+              <div class="contact-actions">
+                <a class="link-muted action-link phone-link" href="tel:010-9900-5092" aria-label="전화 걸기"></a>
+                <a class="link-muted action-link sms-link" href="sms:010-9900-5092" aria-label="문자 보내기"></a>
+              </div>
+            </div>
+            <div class="member-item">
+              <p class="role">신부측 혼주 · 어머니</p>
+              <p class="name">안희경</p>
+              <div class="contact-actions">
+                <a class="link-muted action-link phone-link" href="tel:010-9900-5092" aria-label="전화 걸기"></a>
+                <a class="link-muted action-link sms-link" href="sms:010-9900-5092" aria-label="문자 보내기"></a>
+              </div>
+            </div>
+          </div>
         </article>
       </div>
     </section>
 
     <section class="section-card" id="guestbook">
       <h2>방명록</h2>
+      <p class="notice">신랑 신부에게 축하메세지를 남겨주세요.</p>
       <form id="guestbookForm" class="guestbook-form">
         <input id="guestName" type="text" maxlength="20" placeholder="이름" required />
         <textarea id="guestMessage" maxlength="200" rows="4" placeholder="축하 메시지를 남겨주세요" required></textarea>
@@ -114,3 +163,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+

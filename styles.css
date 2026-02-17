@@ -15,7 +15,7 @@
 
 body {
   margin: 0;
-  font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-family: "MaruBuri", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
   color: var(--text);
   background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
   text-align: center;
@@ -78,6 +78,8 @@ h1 {
   margin: 0;
   font-size: 1.4rem;
   line-height: 1.45;
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  font-weight: 600;
 }
 
 h2 {
@@ -204,12 +206,44 @@ h2 {
   gap: 10px;
 }
 
+.family-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
 .contact-card {
-  border-radius: 12px;
-  background: #fff9f6;
-  border: 1px solid var(--border);
-  padding: 12px;
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  padding: 0;
   text-align: center;
+}
+
+.family-card {
+  padding: 0;
+}
+
+.family-title {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.member-list {
+  display: grid;
+  gap: 0;
+}
+
+.member-item {
+  border: 0;
+  background: transparent;
+  padding: 10px 0;
+}
+
+.member-item + .member-item {
+  border-top: 1px solid var(--border);
 }
 
 .role {
@@ -228,6 +262,40 @@ h2 {
   color: var(--accent);
   text-decoration: none;
   font-weight: 600;
+}
+
+.contact-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-height: 34px;
+  padding: 7px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #f7fcfa;
+  color: var(--accent);
+  font-size: 0;
+  font-weight: 700;
+}
+
+.phone-link::before {
+  content: "\260E";
+  font-size: 1.12rem;
+  line-height: 1;
+}
+
+.sms-link::before {
+  content: "\2709";
+  font-size: 1.02rem;
+  line-height: 1;
 }
 
 .guestbook-form {
@@ -395,6 +463,7 @@ h2 {
 @media (max-width: 360px) {
   .button-row,
   .share-row,
+  .family-grid,
   .contact-grid,
   .gallery-grid {
     grid-template-columns: 1fr;
@@ -406,7 +475,8 @@ h2 {
 }
 
 @media (max-width: 560px) {
-  .button-row {
+  .button-row,
+  .family-grid {
     grid-template-columns: 1fr 1fr;
   }
 
